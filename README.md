@@ -1,13 +1,22 @@
+[![Build on Linux](https://github.com/hartwork/visdriver/actions/workflows/linux-mingw.yml/badge.svg)](https://github.com/hartwork/visdriver/actions/workflows/linux-mingw.yml)
+[![Enforce clang-format](https://github.com/hartwork/visdriver/actions/workflows/clang-format.yml/badge.svg)](https://github.com/hartwork/visdriver/actions/workflows/clang-format.yml)
+
+
+[![screenshots/visdriver_geiss_804x627.png](https://raw.githubusercontent.com/hartwork/visdriver/main/screenshots/visdriver_geiss_804x627.png)](https://github.com/hartwork/visdriver/blob/main/screenshots/visdriver_geiss_804x627.png)
+
+(Re-titled with `wmctrl -r 'Default - Wine desktop' -N 'Geiss @ visdriver (800x600)'`)
+
+
 # What is visdriver?
 
 **visdriver** is
-a win32api application
+a Wine/Windows application
 that uses **Winamp plug-ins**
-to **visualize audio** without actual Winamp/WACUP
-and even actual Windows,
-e.g. with Wine and MinGW on GNU/Linux.
-It is written in C99 and
-licensed under the "GPL v3 or later" license.
+to **visualize audio** without actual Winamp/WACUP,
+in particular with MinGW on GNU/Linux.
+It is written in C99,
+uses plain win32api, and
+is licensed under the "GPL v3 or later" license.
 
 It needs:
 - One input plug-in binary
