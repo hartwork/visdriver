@@ -2,12 +2,12 @@
 
 **visdriver** is
 a win32api application
-written in C99
-licensed under the "GPL v3 or later" license
-that uses Winamp plug-ins
-to visualize audio without actual Winamp/WACUP
+that uses **Winamp plug-ins**
+to **visualize audio** without actual Winamp/WACUP
 and even actual Windows,
 e.g. with Wine and MinGW on GNU/Linux.
+It is written in C99 and
+licensed under the "GPL v3 or later" license.
 
 It needs:
 - One input plug-in binary
@@ -90,3 +90,6 @@ In particular, known limitations are:
 - Waveform data needs 16bit stereo samples to be forwarded, at the moment.
 - Unicode in- and output plug-ins are yet to be supported.
 - `in_linein.dll` (SHA1 `7ab08fcc5bc9ebfcc9a8e3d729fadf2cb05e173a`) of Winamp 5.66 crashes right after loading for an unknown reason
+
+---
+[Sebastian Pipping](https://github.com/hartwork), Berlin, 2023
