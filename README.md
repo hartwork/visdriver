@@ -2,6 +2,11 @@
 [![Enforce clang-format](https://github.com/hartwork/visdriver/actions/workflows/clang-format.yml/badge.svg)](https://github.com/hartwork/visdriver/actions/workflows/clang-format.yml)
 
 
+[![screenshots/visdriver_geiss_804x627.png](https://raw.githubusercontent.com/hartwork/visdriver/main/screenshots/visdriver_geiss_804x627.png)](https://github.com/hartwork/visdriver/blob/main/screenshots/visdriver_geiss_804x627.png)
+
+(Re-titled with `wmctrl -r 'Default - Wine desktop' -N 'Geiss @ visdriver (800x600)'`)
+
+
 # What is visdriver?
 
 **visdriver** is
