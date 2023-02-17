@@ -40,4 +40,8 @@ add_executable(visdriver
         src/visualization.c
         )
 
+# Request Windows >=Vista
+# https://learn.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=msvc-170
+target_compile_definitions(visdriver PRIVATE WINVER=0x0600 _WIN32_WINNT=0x0600)
+
 target_include_directories(visdriver PRIVATE "${CMAKE_SOURCE_DIR}/src/thirdparty")
