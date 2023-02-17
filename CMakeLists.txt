@@ -24,7 +24,7 @@ if (NOT MSVC)
         message(SEND_ERROR "Please pass -DCMAKE_TOOLCHAIN_FILE=[..]"
                 " for use of a MinGW compiler"
                 ", e.g. \"-DCMAKE_TOOLCHAIN_FILE=cmake/mingw-toolchain.cmake\""
-                "; we cannot do that from within CMakeFiles.txt, thank you.")
+                "; we cannot do that from within CMakeLists.txt, thank you.")
     endif ()
     message(STATUS "Using toolchain file \"${CMAKE_TOOLCHAIN_FILE}\".")
 endif ()
