@@ -1,0 +1,55 @@
+# This file is part of the visdriver project.
+#
+# Copyright (c) 2023 Sebastian Pipping <sebastian@pipping.org>
+#
+# visdriver is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option)
+# any later version.
+#
+# visdriver is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with visdriver. If not, see <https://www.gnu.org/licenses/>.
+
+name: Enforce clang-format
+
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: '0 2 * * 5'  # Every Friday at 2am
+
+jobs:
+  clang-format:
+    name: Enforce clang-format
+    runs-on: ubuntu-22.04
+    env:
+      CLANG_MAJOR_VERSION: 16
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Add Clang/LLVM repositories
+      run: |-
+        set -x
+        source /etc/os-release
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo add-apt-repository "deb http://apt.llvm.org/${UBUNTU_CODENAME}/ llvm-toolchain-${UBUNTU_CODENAME}-${CLANG_MAJOR_VERSION} main"
+
+    - name: Install clang-format
+      run: |-
+        set -x
+        sudo apt-get update
+        sudo apt-get install --yes --no-install-recommends -V \
+            clang-format-${CLANG_MAJOR_VERSION}
+
+    - name: Enforce clang-format
+      run: |-
+        set -x
+        clang-format-${CLANG_MAJOR_VERSION} --version
+        clang-format-${CLANG_MAJOR_VERSION} -i src/*.{c,h}
+        git diff --exit-code  # i.e. reject non-empty diff
