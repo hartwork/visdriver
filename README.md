@@ -103,7 +103,8 @@ In particular, known limitations are:
   spectral analysis is yet to be done.
 - Waveform data needs 16bit stereo samples to be forwarded, at the moment.
 - Unicode in- and output plug-ins are yet to be supported.
-- `in_linein.dll` (SHA1 `7ab08fcc5bc9ebfcc9a8e3d729fadf2cb05e173a`) of Winamp 5.66 crashes right after loading for an unknown reason
+- `in_linein.dll` (SHA1 `7ab08fcc5bc9ebfcc9a8e3d729fadf2cb05e173a`)
+  of Winamp 5.66 crashes right after loading for an unknown reason.
 
 ---
 [Sebastian Pipping](https://github.com/hartwork), Berlin, 2023
