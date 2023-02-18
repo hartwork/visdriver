@@ -177,7 +177,7 @@ int main(int argc, char **argv) {
     unload_output_module(output_module);
     return 1;
   }
-  log_info("Vis plugin is \"%s\" (API %d).", vis_header->description,
+  log_info("Vis plugin is \"%s\" (API 0x%X).", vis_header->description,
            vis_header->version);
   winampVisModule *const vis_module =
       load_vis_module(vis_header, 0, main_window, vis_dll_handle);
