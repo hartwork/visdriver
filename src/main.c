@@ -17,7 +17,9 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#if !defined(_MSC_VER)
 #include <unistd.h> // usleep
+#endif
 
 #include <winamp/wa_ipc.h>
 
@@ -27,6 +29,15 @@
 #include "output_plugin.h"
 #include "vis_plugin.h"
 #include "visualization.h"
+
+static void sleep_milliseconds(int milliseconds) {
+#if defined(_MSC_VER)
+  Sleep(milliseconds);
+#else
+  const useconds_t microseconds = milliseconds * 1000;
+  usleep(microseconds);
+#endif
+}
 
 static bool is_track_finished_message(const MSG *message, HWND main_window) {
   return message->hwnd == main_window && message->message == WM_WA_MPEG_EOF;
@@ -214,7 +225,7 @@ int main(int argc, char **argv) {
       }
     }
 
-    usleep(1000); // to avoid 100% CPU usage
+    sleep_milliseconds(1); // to avoid 100% CPU usage
   }
 
   // Stop playback
