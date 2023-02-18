@@ -44,26 +44,31 @@ It needs:
 # How to Compile
 
 ```console
-# cmake -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-toolchain.cmake -DCMAKE_BUILD_TYPE=Release -S . -B build
+# cmake -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-toolchain.cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build
 # make -C build -j$(nproc) VERBOSE=1
 ```
 
 # How to Run
 
-First, copy MinGW runtime DLLs in place, e.g. on Gentoo:
-```console
-# cp -v \
-    /usr/i686-w64-mingw32/usr/bin/libwinpthread-1.dll \
-    /usr/lib/gcc/i686-w64-mingw32/12/libgcc_s_sjlj-1.dll \
-    /usr/lib/gcc/i686-w64-mingw32/12/libstdc++-6.dll \
-    .
-```
-
-And then let **visdriver** tell you what it needs:
+Let **visdriver** tell you what it needs:
 ```console
 # WINEDEBUG=-all wine ./build/visdriver.exe --help
 USAGE: visdriver.exe PATH/IN.dll PATH/OUT.dll PATH/VIS.dll [AUDIO_FILE ..]
 ```
+
+If you end up with errors about missing DLLs, copying these files in place
+should help.  E.g. for MinGW DLLs on Ubuntu 20.04 it would be:
+
+```console
+# cp -v \
+    /usr/i686-w64-mingw32/lib/libwinpthread-1.dll \
+    /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libgcc_s_sjlj-1.dll \
+    /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libstdc++-6.dll \
+    .
+```
+
+The locations of these files vary among GNU/Linux distros.
+
 
 # How to Force Fullscreen Visualization into a Window
 
@@ -98,7 +103,8 @@ In particular, known limitations are:
   spectral analysis is yet to be done.
 - Waveform data needs 16bit stereo samples to be forwarded, at the moment.
 - Unicode in- and output plug-ins are yet to be supported.
-- `in_linein.dll` (SHA1 `7ab08fcc5bc9ebfcc9a8e3d729fadf2cb05e173a`) of Winamp 5.66 crashes right after loading for an unknown reason
+- `in_linein.dll` (SHA1 `7ab08fcc5bc9ebfcc9a8e3d729fadf2cb05e173a`)
+  of Winamp 5.66 crashes right after loading for an unknown reason.
 
 ---
 [Sebastian Pipping](https://github.com/hartwork), Berlin, 2023
