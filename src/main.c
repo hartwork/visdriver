@@ -176,7 +176,7 @@ int main(int argc, char **argv) {
   vis_module->Init(vis_module);
 
   // Main loop
-  MSG message = {};
+  MSG message = {NULL};
   bool running = true;
   ULONGLONG last_stat_dump_at_ms = 0;
 
