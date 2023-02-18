@@ -42,6 +42,18 @@ It needs:
 - CMake >=3.0 (and potentially GNU make or Ninja).
 
 
+# Download
+
+If would you like to download ready-to-run Windows binaries
+built by the CI off the latest code on branch `main`,
+there are two options:
+- [Binaries built by MinGW/GCC](https://github.com/hartwork/visdriver/actions/workflows/linux-mingw.yml?query=branch%3Amain)
+- [Binaries built by Visual Studio](https://github.com/hartwork/visdriver/actions/workflows/windows-msvc.yml?query=branch%3Amain)
+
+Just click the latest workflow run there for either of these, and
+its page will list artifacts for download near the bottom.
+
+
 # How to Compile
 
 ```console
