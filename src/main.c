@@ -91,6 +91,23 @@ const char *get_progname(const char *argv_zero) {
   return last_backslash + 1;
 }
 
+void self_identify() {
+  log_info("==================================================================="
+           "=============");
+  log_info("                    _         _      _                     ");
+  log_info("             __   _(_)___  __| |_ __(_)_   _____ _ __      ");
+  log_info("             \\ \\ / / / __|/ _` | '__| \\ \\ / / _ \\ '__|");
+  log_info("              \\ V /| \\__ \\ (_| | |  | |\\ V /  __/ |    ");
+  log_info("               \\_/ |_|___/\\__,_|_|  |_| \\_/ \\___|_| v0.0.0");
+  log_info("");
+  log_info("Software libre licensed under GPL v3 or later.");
+  log_info("Brought to you by Sebastian Pipping <sebastian@pipping.org>.");
+  log_info("Please report bugs at https://github.com/hartwork/visdriver/issues "
+           "-- thank you!");
+  log_info("==================================================================="
+           "=============");
+}
+
 int main(int argc, char **argv) {
   if (argc < 4) {
     fprintf(stderr,
@@ -100,6 +117,8 @@ int main(int argc, char **argv) {
   }
 
   log_auto_configure_indent();
+
+  self_identify();
 
   const char *const input_plugin_filename = argv[1];
   const char *const output_plugin_filename = argv[2];
