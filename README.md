@@ -44,7 +44,7 @@ It needs:
 # How to Compile
 
 ```console
-# cmake -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-toolchain.cmake -DCMAKE_BUILD_TYPE=Release -S . -B build
+# cmake -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-toolchain.cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build
 # make -C build -j$(nproc) VERBOSE=1
 ```
 
