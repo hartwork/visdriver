@@ -40,6 +40,10 @@ add_executable(visdriver
         src/visualization.c
         )
 
+if (MSVC)
+    target_compile_definitions(visdriver PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif ()
+
 # Request Windows >=Vista
 # https://learn.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=msvc-170
 target_compile_definitions(visdriver PRIVATE WINVER=0x0600 _WIN32_WINNT=0x0600)
