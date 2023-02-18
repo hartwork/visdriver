@@ -15,6 +15,10 @@
 // You should have received a copy of the GNU General Public License along
 // with visdriver. If not, see <https://www.gnu.org/licenses/>.
 
+#if defined(_MSC_VER)
+#define strncasecmp _strnicmp
+#endif
+
 #include <stdbool.h>
 #include <string.h>
 
