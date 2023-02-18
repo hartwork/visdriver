@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License along
 # with visdriver. If not, see <https://www.gnu.org/licenses/>.
 
-name: Build on Linux
+name: Build on Windows
 
 on:
   pull_request:
@@ -24,49 +24,41 @@ on:
     - cron: '0 2 * * 5'  # Every Friday at 2am
 
 jobs:
-  linux-mingw:
-    name: Build on Linux
-    runs-on: ubuntu-20.04
+  windows-msvc:
+    name: Build on Windows
+    runs-on: windows-2022
+    defaults:
+      run:
+        shell: bash
     steps:
 
     - uses: actions/checkout@v3
 
-    - name: Install build dependencies
-      run: |-
-        set -x
-        sudo apt-get update
-        sudo apt-get install --yes --no-install-recommends -V \
-            build-essential \
-            cmake \
-            mingw-w64
-
     - name: Configure
       run: |-
         cmake \
-          -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-toolchain.cmake \
+          -G "Visual Studio 17 2022" \
+          -A Win32 \
           -DCMAKE_BUILD_TYPE=RelWithDebInfo \
           -S . \
           -B build
 
     - name: Make
       run: |-
-        make -C build -j$(nproc) VERBOSE=1
+        cmake --build build/
 
     - name: Prepare build artifacts for upload
       run: |-
-        mkdir "visdriver_win32bin_mingw_${{ github.sha }}"
+        mkdir "visdriver_win32bin_msvc_${{ github.sha }}"
         cp -v \
           COPYING \
           README.md \
-          /usr/i686-w64-mingw32/lib/libwinpthread-1.dll \
-          /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libgcc_s_sjlj-1.dll \
-          /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libstdc++-6.dll \
-          build/visdriver.exe \
-          "visdriver_win32bin_mingw_${{ github.sha }}"/
+          build/Debug/visdriver.exe \
+          "visdriver_win32bin_msvc_${{ github.sha }}"/
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: "visdriver_win32bin_mingw_${{ github.sha }}"
-        path: "visdriver_win32bin_mingw_${{ github.sha }}/"
+        name: "visdriver_win32bin_msvc_${{ github.sha }}"
+        path: "visdriver_win32bin_msvc_${{ github.sha }}/"
         if-no-files-found: error

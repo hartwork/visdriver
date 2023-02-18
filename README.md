@@ -1,4 +1,5 @@
 [![Build on Linux](https://github.com/hartwork/visdriver/actions/workflows/linux-mingw.yml/badge.svg)](https://github.com/hartwork/visdriver/actions/workflows/linux-mingw.yml)
+[![Build on Windows](https://github.com/hartwork/visdriver/actions/workflows/windows-msvc.yml/badge.svg)](https://github.com/hartwork/visdriver/actions/workflows/windows-msvc.yml)
 [![Enforce clang-format](https://github.com/hartwork/visdriver/actions/workflows/clang-format.yml/badge.svg)](https://github.com/hartwork/visdriver/actions/workflows/clang-format.yml)
 
 

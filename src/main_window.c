@@ -307,7 +307,7 @@ static void resize_embedded_window(HWND embedded, HWND container) {
   }
 }
 
-static __stdcall LRESULT main_window_proc(HWND window, UINT message,
+static LRESULT __stdcall main_window_proc(HWND window, UINT message,
                                           WPARAM wparam, LPARAM lparam) {
   log_window_proc_message(window, message, wparam, lparam);
 
