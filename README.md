@@ -112,9 +112,7 @@ If you need help getting that set up, please reach out.
 Please expect some rough edges, and potentially even crashes with some plug-ins.
 
 In particular, known limitations are:
-- `vis_module->spectrumData[2][576]` is currently filled with debug data,
-  spectral analysis is yet to be done.
-- Waveform data needs 16bit stereo samples to be forwarded, at the moment.
+- Waveform/spectrum needs 16bit stereo samples input, at the moment.
 - Unicode in- and output plug-ins are yet to be supported.
 - `in_linein.dll` (SHA1 `7ab08fcc5bc9ebfcc9a8e3d729fadf2cb05e173a`)
   of Winamp 5.66 crashes right after loading for an unknown reason.
