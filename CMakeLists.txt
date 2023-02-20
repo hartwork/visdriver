@@ -38,6 +38,8 @@ add_executable(visdriver
         src/output_plugin.c
         src/vis_plugin.c
         src/visualization.c
+        src/thirdparty/kissfft/kiss_fft.c
+        src/thirdparty/kissfft/kiss_fftr.c
         )
 
 if (MSVC)
