@@ -33,9 +33,11 @@ It needs:
   [[binary]](https://sourceforge.net/projects/plainamp/files/Plainamp/0.2.3/)),
 - One vis plugin binary
   (e.g. `vis_geis.dll`
+  [[source]](https://www.geisswerks.com/geiss/)
+  [[binary]](https://www.geisswerks.com/geiss/)
   or `vis_avs.dll`
   [[source]](https://github.com/grandchild/vis_avs)
-  ),
+  [[binary]](https://github.com/grandchild/vis_avs/actions)),
 - A MinGW compiler (or Visual Studio),
 - Wine (or Windows),
 - CMake >=3.0 (and potentially GNU make or Ninja).
