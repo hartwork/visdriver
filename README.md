@@ -26,7 +26,7 @@ It needs:
   [[binary]](https://home.hccnet.nl/th.v.d.gronde/dev/lineinWA2/)
   or `in_mad.dll`
   [[source]](https://sourceforge.net/projects/plainamp/files/in_mad/)
-  [[binary]](https://www.mars.org/home/rob/proj/mpeg/mad-plugin/#install)),
+  [[binary]](https://www.mars.org/home/rob/proj/mpeg/mad-plugin/#install) for MP3 playback),
 - One output plugin binary
   (e.g. `out_wave_gpl.dll`
   [[source]](https://sourceforge.net/projects/plainamp/files/out_wave_gpl/)
