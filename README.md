@@ -55,10 +55,20 @@ its page will list artifacts for download near the bottom.
 
 # How to Compile
 
+## With MinGW/GCC
+
 ```console
 # cmake -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-toolchain.cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build
 # make -C build -j$(nproc) VERBOSE=1
 ```
+
+## With Visual Studio
+
+```console
+# cmake -G "Visual Studio 17 2022" -A Win32 -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build
+# cmake --build build
+```
+
 
 # How to Run
 
