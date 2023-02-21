@@ -22,20 +22,19 @@ is licensed under the "GPL v3 or later" license.
 It needs:
 - One input plug-in binary
   (e.g. `in_line.dll`
-  [[1]](https://github.com/jaspervdg/lineinWA)
-  [[2]](https://home.hccnet.nl/th.v.d.gronde/dev/lineinWA2/)
+  [[source]](https://github.com/jaspervdg/lineinWA)
+  [[binary]](https://home.hccnet.nl/th.v.d.gronde/dev/lineinWA2/)
   or `in_mad.dll`
-  [[1]](https://sourceforge.net/projects/plainamp/files/in_mad/)
-  [[2]](https://www.mars.org/home/rob/proj/mpeg/mad-plugin/#install)
-  ),
+  [[source]](https://sourceforge.net/projects/plainamp/files/in_mad/)
+  [[binary]](https://www.mars.org/home/rob/proj/mpeg/mad-plugin/#install) for MP3 playback),
 - One output plugin binary
   (e.g. `out_wave_gpl.dll`
-  [[1]](https://sourceforge.net/projects/plainamp/files/out_wave_gpl/)
-  ), and
+  [[source]](https://sourceforge.net/projects/plainamp/files/out_wave_gpl/)
+  [[binary]](https://sourceforge.net/projects/plainamp/files/Plainamp/0.2.3/)),
 - One vis plugin binary
   (e.g. `vis_geis.dll`
   or `vis_avs.dll`
-  [[1]](https://github.com/grandchild/vis_avs)
+  [[source]](https://github.com/grandchild/vis_avs)
   ),
 - A MinGW compiler (or Visual Studio),
 - Wine (or Windows),
@@ -56,10 +55,20 @@ its page will list artifacts for download near the bottom.
 
 # How to Compile
 
+## With MinGW/GCC
+
 ```console
 # cmake -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-toolchain.cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build
 # make -C build -j$(nproc) VERBOSE=1
 ```
+
+## With Visual Studio
+
+```console
+# cmake -G "Visual Studio 17 2022" -A Win32 -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build
+# cmake --build build
+```
+
 
 # How to Run
 
@@ -89,6 +98,12 @@ If you would like to force a fullscreen vis plugin into using a Window, there ar
 - a) Wine's built-in [virtual desktop](https://wiki.winehq.org/FAQ#How_do_I_get_Wine_to_launch_an_application_in_a_virtual_desktop.3F) feature
 - b) Using [Xephyr](https://en.wikipedia.org/wiki/Xephyr) for a quick way to a nested Xorg server,
      that your distro has already packaged.
+
+For Wine's [virtual desktop](https://wiki.winehq.org/FAQ#How_do_I_get_Wine_to_launch_an_application_in_a_virtual_desktop.3F) feature, this wrapper should do:
+```bash
+#! /usr/bin/env bash
+exec wine explorer /desktop=visdriver,1024x768 ./build/visdriver.exe "$@"
+```
 
 For Xephyr, a wrapper script like this should do:
 ```bash
