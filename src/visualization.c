@@ -35,6 +35,15 @@
 winampVisModule *g_active_vis_module = NULL;
 static kiss_fftr_cfg g_kiss_fft_cfg = NULL;
 static int16_t g_prev_interleaved[VIS_FRAMES * 2];
+static kiss_fft_scalar g_hann_factors[VIS_FRAMES * 2];
+
+static kiss_fft_scalar hann_factor(size_t index, size_t samples);
+
+static void compute_hann_factors() {
+  for (int i = 0; i < VIS_FRAMES * 2; i++) {
+    g_hann_factors[i] = hann_factor(i, VIS_FRAMES * 2);
+  }
+}
 
 void __cdecl SAVSAInit(int maxlatency_in_ms, int srate) {
   log_debug("Input plugin announced: Maximum latency %dms, sampling rate %d "
@@ -44,6 +53,8 @@ void __cdecl SAVSAInit(int maxlatency_in_ms, int srate) {
   memset(g_prev_interleaved, 0, sizeof(g_prev_interleaved));
 
   g_kiss_fft_cfg = kiss_fftr_alloc(VIS_FRAMES * 2, 0, NULL, NULL);
+
+  compute_hann_factors();
 }
 
 void __cdecl SAVSADeInit() {
@@ -85,10 +96,10 @@ void __cdecl SAAddPCMData(void *PCMData, int nch, int bps, int timestamp) {
       // De-interleave and apply Hann window function
       scalar_in_first_half[i] =
           (kiss_fft_scalar)g_prev_interleaved[2 * i + channel] *
-          hann_factor(i, VIS_FRAMES * 2);
+          g_hann_factors[i];
       scalar_in_second_half[i] =
           (kiss_fft_scalar)(int16_t)interleaved[2 * i + channel] *
-          hann_factor(i + VIS_FRAMES, VIS_FRAMES * 2);
+          g_hann_factors[i + VIS_FRAMES];
     }
 
     // Apply FFT
