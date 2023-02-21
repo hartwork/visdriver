@@ -22,20 +22,19 @@ is licensed under the "GPL v3 or later" license.
 It needs:
 - One input plug-in binary
   (e.g. `in_line.dll`
-  [[1]](https://github.com/jaspervdg/lineinWA)
-  [[2]](https://home.hccnet.nl/th.v.d.gronde/dev/lineinWA2/)
+  [[source]](https://github.com/jaspervdg/lineinWA)
+  [[binary]](https://home.hccnet.nl/th.v.d.gronde/dev/lineinWA2/)
   or `in_mad.dll`
-  [[1]](https://sourceforge.net/projects/plainamp/files/in_mad/)
-  [[2]](https://www.mars.org/home/rob/proj/mpeg/mad-plugin/#install)
-  ),
+  [[source]](https://sourceforge.net/projects/plainamp/files/in_mad/)
+  [[binary]](https://www.mars.org/home/rob/proj/mpeg/mad-plugin/#install)),
 - One output plugin binary
   (e.g. `out_wave_gpl.dll`
-  [[1]](https://sourceforge.net/projects/plainamp/files/out_wave_gpl/)
-  ), and
+  [[source]](https://sourceforge.net/projects/plainamp/files/out_wave_gpl/)
+  [[binary]](https://sourceforge.net/projects/plainamp/files/Plainamp/0.2.3/)), and
 - One vis plugin binary
   (e.g. `vis_geis.dll`
   or `vis_avs.dll`
-  [[1]](https://github.com/grandchild/vis_avs)
+  [[source]](https://github.com/grandchild/vis_avs)
   ),
 - A MinGW compiler (or Visual Studio),
 - Wine (or Windows),
