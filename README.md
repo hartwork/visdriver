@@ -37,7 +37,7 @@ It needs:
   [[binary]](https://www.geisswerks.com/geiss/)
   or `vis_avs.dll`
   [[source]](https://github.com/grandchild/vis_avs)
-  ),
+  [[binary]](https://github.com/grandchild/vis_avs/actions)),
 - A MinGW compiler (or Visual Studio),
 - Wine (or Windows),
 - CMake >=3.0 (and potentially GNU make or Ninja).
