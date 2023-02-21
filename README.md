@@ -90,6 +90,12 @@ If you would like to force a fullscreen vis plugin into using a Window, there ar
 - b) Using [Xephyr](https://en.wikipedia.org/wiki/Xephyr) for a quick way to a nested Xorg server,
      that your distro has already packaged.
 
+For Wine's [virtual desktop](https://wiki.winehq.org/FAQ#How_do_I_get_Wine_to_launch_an_application_in_a_virtual_desktop.3F) feature, this wrapper should do:
+```bash
+#! /usr/bin/env bash
+exec wine explorer /desktop=visdriver,1024x768 ./build/visdriver.exe "$@"
+```
+
 For Xephyr, a wrapper script like this should do:
 ```bash
 #! /usr/bin/env bash
