@@ -33,6 +33,8 @@ It needs:
   [[binary]](https://sourceforge.net/projects/plainamp/files/Plainamp/0.2.3/)),
 - One vis plugin binary
   (e.g. `vis_geis.dll`
+  [[source]](https://www.geisswerks.com/geiss/)
+  [[binary]](https://www.geisswerks.com/geiss/)
   or `vis_avs.dll`
   [[source]](https://github.com/grandchild/vis_avs)
   ),
