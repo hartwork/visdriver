@@ -355,6 +355,7 @@ static LRESULT __stdcall main_window_proc(HWND window, UINT message,
       return (LRESULT)ini_path;
     }
     case IPC_GET_EMBEDIF: // == 505
+      ShowWindow(g_main_window, SW_SHOW);
       if (wparam == 0) {
         return (LRESULT)embed_window;
       } else {
@@ -404,20 +405,20 @@ HWND create_main_window() {
   const int window_left = (primary_screen_width - window_width) / 2;
   const int window_top = (primary_screen_height - window_height) / 2;
 
-  const HWND window = CreateWindowExA(
-      0,                           // [in]           DWORD    dwExStyle,
-      window_class_name,           // [in, optional] LPCSTR lpClassName,
-      NULL,                        // [in, optional] LPCSTR    lpWindowName,
-      WS_TILEDWINDOW | WS_VISIBLE, // [in]           DWORD     dwStyle,
-      window_left,                 // [in]           int       X,
-      window_top,                  // [in]           int       Y,
-      window_width,                // [in]           int       nWidth,
-      window_height,               // [in]           int       nHeight,
-      0,                           // [in, optional] HWND      hWndParent,
-      0,                           // [in, optional] HMENU     hMenu,
-      0,                           // [in, optional] HINSTANCE hInstance,
-      NULL                         // [in, optional] LPVOID    lpParam
-  );
+  const HWND window =
+      CreateWindowExA(0,                 // [in]           DWORD    dwExStyle,
+                      window_class_name, // [in, optional] LPCSTR lpClassName,
+                      NULL,           // [in, optional] LPCSTR    lpWindowName,
+                      WS_TILEDWINDOW, // [in]           DWORD     dwStyle,
+                      window_left,    // [in]           int       X,
+                      window_top,     // [in]           int       Y,
+                      window_width,   // [in]           int       nWidth,
+                      window_height,  // [in]           int       nHeight,
+                      0,              // [in, optional] HWND      hWndParent,
+                      0,              // [in, optional] HMENU     hMenu,
+                      0,              // [in, optional] HINSTANCE hInstance,
+                      NULL            // [in, optional] LPVOID    lpParam
+      );
   if (window == 0) {
     log_error("CreateWindowExA failed.");
     return 0;
