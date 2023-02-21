@@ -30,7 +30,7 @@ It needs:
 - One output plugin binary
   (e.g. `out_wave_gpl.dll`
   [[source]](https://sourceforge.net/projects/plainamp/files/out_wave_gpl/)
-  [[binary]](https://sourceforge.net/projects/plainamp/files/Plainamp/0.2.3/)), and
+  [[binary]](https://sourceforge.net/projects/plainamp/files/Plainamp/0.2.3/)),
 - One vis plugin binary
   (e.g. `vis_geis.dll`
   or `vis_avs.dll`
