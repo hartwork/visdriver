@@ -31,6 +31,7 @@ endif ()
 
 add_executable(visdriver
         src/audio_dsp.c
+        src/config.c
         src/input_plugin.c
         src/log.c
         src/main.c
