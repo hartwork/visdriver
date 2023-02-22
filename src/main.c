@@ -91,7 +91,12 @@ void self_identify() {
   log_info("             __   _(_)___  __| |_ __(_)_   _____ _ __      ");
   log_info("             \\ \\ / / / __|/ _` | '__| \\ \\ / / _ \\ '__|");
   log_info("              \\ V /| \\__ \\ (_| | |  | |\\ V /  __/ |    ");
-  log_info("               \\_/ |_|___/\\__,_|_|  |_| \\_/ \\___|_| v0.0.0");
+  log_info("               \\_/ |_|___/\\__,_|_|  |_| \\_/ \\___|_| v%s",
+           PROJECT_VERSION);
+  if (strcmp(PROJECT_GIT_SHA1, "") != 0) {
+    log_info("");
+    log_info("           ++ %s ++", PROJECT_GIT_SHA1);
+  }
   log_info("");
   log_info("Software libre licensed under GPL v3 or later.");
   log_info("Brought to you by Sebastian Pipping <sebastian@pipping.org>.");

@@ -22,10 +22,16 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 static int show_version_and_exit(struct argparse *self,
                                  const struct argparse_option *option) {
-  printf("%s %s\n", "visdriver", "0.0.0");
+  printf("%s %s", "visdriver", PROJECT_VERSION);
+  if (strcmp(PROJECT_GIT_SHA1, "") != 0) {
+    printf(" (%s)", PROJECT_GIT_SHA1);
+  }
+  printf("\n");
+
   exit(0);
 }
 

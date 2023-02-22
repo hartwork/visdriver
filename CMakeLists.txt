@@ -17,7 +17,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
-project(visdriver)
+project(visdriver VERSION 0.0.0)
 
 if (NOT MSVC)
     if (NOT CMAKE_TOOLCHAIN_FILE)
@@ -53,3 +53,10 @@ endif ()
 target_compile_definitions(visdriver PRIVATE WINVER=0x0600 _WIN32_WINNT=0x0600)
 
 target_include_directories(visdriver PRIVATE "${CMAKE_SOURCE_DIR}/src/thirdparty")
+
+# Pass version and Git SHA1 if available
+if (IS_DIRECTORY "${CMAKE_SOURCE_DIR}/.git")
+    execute_process(COMMAND git rev-parse HEAD OUTPUT_VARIABLE PROJECT_GIT_SHA1)
+    string(STRIP "${PROJECT_GIT_SHA1}" PROJECT_GIT_SHA1)
+endif()
+target_compile_definitions(visdriver PRIVATE PROJECT_VERSION="${PROJECT_VERSION}" PROJECT_GIT_SHA1="${PROJECT_GIT_SHA1}")
