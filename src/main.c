@@ -23,6 +23,7 @@
 
 #include <winamp/wa_ipc.h>
 
+#include "config.h"
 #include "input_plugin.h"
 #include "log.h"
 #include "main_window.h"
@@ -83,14 +84,6 @@ static bool start_playback(In_Module *input_module, const char *current_track,
   return true;
 }
 
-const char *get_progname(const char *argv_zero) {
-  const char *last_backslash = strrchr(argv_zero, '\\');
-  if (last_backslash == NULL) {
-    return argv_zero;
-  }
-  return last_backslash + 1;
-}
-
 void self_identify() {
   log_info("==================================================================="
            "=============");
@@ -98,7 +91,12 @@ void self_identify() {
   log_info("             __   _(_)___  __| |_ __(_)_   _____ _ __      ");
   log_info("             \\ \\ / / / __|/ _` | '__| \\ \\ / / _ \\ '__|");
   log_info("              \\ V /| \\__ \\ (_| | |  | |\\ V /  __/ |    ");
-  log_info("               \\_/ |_|___/\\__,_|_|  |_| \\_/ \\___|_| v0.0.0");
+  log_info("               \\_/ |_|___/\\__,_|_|  |_| \\_/ \\___|_| v%s",
+           PROJECT_VERSION);
+  if (strcmp(PROJECT_GIT_SHA1, "") != 0) {
+    log_info("");
+    log_info("           ++ %s ++", PROJECT_GIT_SHA1);
+  }
   log_info("");
   log_info("Software libre licensed under GPL v3 or later.");
   log_info("Brought to you by Sebastian Pipping <sebastian@pipping.org>.");
@@ -109,27 +107,13 @@ void self_identify() {
 }
 
 int main(int argc, char **argv) {
-  if (argc < 4) {
-    fprintf(stderr,
-            "USAGE: %s PATH/IN.dll PATH/OUT.dll PATH/VIS.dll [AUDIO_FILE ..]",
-            get_progname(argv[0]));
-    return 1;
-  }
+  visdriver_config_t config = {NULL};
+  parse_command_line(&config, argc, argv); // may exit
 
   log_auto_configure_indent();
 
   self_identify();
 
-  const char *const input_plugin_filename = argv[1];
-  const char *const output_plugin_filename = argv[2];
-  const char *const vis_plugin_filename = argv[3];
-
-  const char *const default_track =
-      "line://"; // for in_line.dll or in_linein.dll
-  const char *const *const default_tracks = &default_track;
-  const char *const *const tracks =
-      (argc >= 5) ? (const char *const *)(argv + 4) : default_tracks;
-  const int track_count = (argc >= 5) ? (argc - 4) : 1;
   int current_track_index = -1;
   bool playing = false;
 
@@ -141,21 +125,21 @@ int main(int argc, char **argv) {
   }
 
   // Load output plugin
-  log_info("Loading output plugin \"%s\"...", output_plugin_filename);
+  log_info("Loading output plugin \"%s\"...", config.output_plugin_filename);
   Out_Module *const output_module =
-      load_output_module(output_plugin_filename, main_window);
+      load_output_module(config.output_plugin_filename, main_window);
   if (output_module == NULL) {
     log_error("Output plugin could not be loaded, aborting.");
     return 2;
   }
   log_info("Output plugin is \"%s\" (API 0x%x).", output_module->description,
-           output_module->version, output_plugin_filename);
+           output_module->version, config.output_plugin_filename);
   output_module->Init();
 
   // Load input plugin
-  log_info("Loading input plugin \"%s\"...", input_plugin_filename);
-  In_Module *const input_module =
-      load_input_module(input_plugin_filename, main_window, output_module);
+  log_info("Loading input plugin \"%s\"...", config.input_plugin_filename);
+  In_Module *const input_module = load_input_module(
+      config.input_plugin_filename, main_window, output_module);
   if (input_module == NULL) {
     log_error("Input plugin could not be loaded, aborting.");
     unload_output_module(output_module);
@@ -167,10 +151,10 @@ int main(int argc, char **argv) {
   input_module->Init();
 
   // Load vis plugin
-  log_info("Loading vis plugin \"%s\"...", vis_plugin_filename);
+  log_info("Loading vis plugin \"%s\"...", config.vis_plugin_filename);
   HMODULE vis_dll_handle = 0;
   winampVisHeader *const vis_header =
-      load_vis_header(vis_plugin_filename, &vis_dll_handle);
+      load_vis_header(config.vis_plugin_filename, &vis_dll_handle);
   if (vis_header == NULL) {
     log_error("Vis plugin could not be loaded.");
     unload_input_module(input_module);
@@ -182,7 +166,7 @@ int main(int argc, char **argv) {
   winampVisModule *const vis_module =
       load_vis_module(vis_header, 0, main_window, vis_dll_handle);
   if (vis_module == NULL) {
-    log_error("Vis plugin \"%s\" has no modules.", vis_plugin_filename);
+    log_error("Vis plugin \"%s\" has no modules.", config.vis_plugin_filename);
     unload_vis_header(vis_header, vis_dll_handle);
     unload_input_module(input_module);
     unload_output_module(output_module);
@@ -220,14 +204,14 @@ int main(int argc, char **argv) {
     // Start to play (at all or the next track)
     if (needs_playback_action) {
       current_track_index++;
-      if (current_track_index >= track_count) {
+      if (current_track_index >= config.track_count) {
         current_track_index = 0; // i.e. loop the playlist
       }
 
-      const char *const current_track = tracks[current_track_index];
+      const char *const current_track = config.tracks[current_track_index];
 
       if (start_playback(input_module, current_track, current_track_index,
-                         track_count)) {
+                         config.track_count)) {
         playing = true;
       } else {
         current_track_index++;
@@ -239,7 +223,8 @@ int main(int argc, char **argv) {
       const ULONGLONG now_ms = GetTickCount64();
       const ULONGLONG time_elapsed_ms = (now_ms - last_stat_dump_at_ms);
       if (time_elapsed_ms >= 1000) {
-        display_playback_status(input_module, current_track_index, track_count);
+        display_playback_status(input_module, current_track_index,
+                                config.track_count);
         last_stat_dump_at_ms = now_ms;
       }
     }
