@@ -77,7 +77,24 @@ its page will list artifacts for download near the bottom.
 Let **visdriver** tell you what it needs:
 ```console
 # WINEDEBUG=-all wine ./build/visdriver.exe --help
-USAGE: visdriver.exe PATH/IN.dll PATH/OUT.dll PATH/VIS.dll [AUDIO_FILE ..]
+Usage: visdriver [OPTIONS] --in PATH/IN.dll --out PATH/OUT.dll --vis PATH/VIS.dll [--] [AUDIO_FILE ..]
+   or: visdriver --help
+   or: visdriver --version
+
+visdriver uses Winamp plug-ins to visualize audio.
+
+    -h, --help        show this help message and exit
+    -V, --version     show the version and exit
+
+Plug-in related arguments:
+    -I, --in=<str>    input plug-in to use
+    -O, --out=<str>   output plug-in to use
+    -W, --vis=<str>   vis plug-in to use
+
+Software libre licensed under GPL v3 or later.
+Brought to you by Sebastian Pipping <sebastian@pipping.org>.
+
+Please report bugs at https://github.com/hartwork/visdriver -- thank you!
 ```
 
 If you end up with errors about missing DLLs, copying these files in place
