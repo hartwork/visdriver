@@ -103,11 +103,7 @@ void self_identify() {
 
 int main(int argc, char **argv) {
   visdriver_config_t config = {NULL};
-  const int parse_ret =
-      parse_command_line(&config, argc, (const char *const *)argv);
-  if (parse_ret != 0) {
-    return parse_ret;
-  }
+  parse_command_line(&config, argc, argv); // may exit
 
   log_auto_configure_indent();
 

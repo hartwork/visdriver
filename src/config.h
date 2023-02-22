@@ -26,7 +26,7 @@ typedef struct _visdriver_config_t {
   int track_count;
 } visdriver_config_t;
 
-int parse_command_line(visdriver_config_t *config, int argc,
-                       const char *const *argv);
+void parse_command_line(visdriver_config_t *config, int argc,
+                        const char **argv);
 
 #endif // ifndef CONFIG_H
