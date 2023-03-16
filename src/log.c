@@ -49,6 +49,7 @@ void log_debug(const char *format, ...) {
   va_start(args, format);
   vfprintf(stderr, format, args);
   fprintf(stderr, "\n");
+  va_end(args);
 }
 
 void log_error(const char *format, ...) {
@@ -57,6 +58,7 @@ void log_error(const char *format, ...) {
   va_start(args, format);
   vfprintf(stderr, format, args);
   fprintf(stderr, "\n");
+  va_end(args);
 }
 
 void log_info(const char *format, ...) {
@@ -65,4 +67,5 @@ void log_info(const char *format, ...) {
   va_start(args, format);
   vfprintf(stderr, format, args);
   fprintf(stderr, "\n");
+  va_end(args);
 }
