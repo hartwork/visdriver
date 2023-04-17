@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab  # v3.5.2
 
     - name: Install build dependencies
       run: |-
@@ -65,7 +65,7 @@ jobs:
           "visdriver_win32bin_mingw_${{ github.sha }}"/
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce  # v3.1.2
       with:
         name: "visdriver_win32bin_mingw_${{ github.sha }}"
         path: "visdriver_win32bin_mingw_${{ github.sha }}/"
