@@ -31,7 +31,7 @@ on:
 jobs:
   linux-mingw:
     name: Build on Linux
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
 
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
@@ -64,8 +64,8 @@ jobs:
           COPYING \
           README.md \
           /usr/i686-w64-mingw32/lib/libwinpthread-1.dll \
-          /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libgcc_s_sjlj-1.dll \
-          /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libstdc++-6.dll \
+          /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_dw2-1.dll \
+          /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll \
           build/visdriver.exe \
           "visdriver_win32bin_mingw_${{ github.sha }}"/
 

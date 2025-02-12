@@ -98,13 +98,13 @@ Please report bugs at https://github.com/hartwork/visdriver -- thank you!
 ```
 
 If you end up with errors about missing DLLs, copying these files in place
-should help.  E.g. for MinGW DLLs on Ubuntu 20.04 it would be:
+should help.  E.g. for MinGW DLLs on Ubuntu 24.04 it would be:
 
 ```console
 # cp -v \
     /usr/i686-w64-mingw32/lib/libwinpthread-1.dll \
-    /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libgcc_s_sjlj-1.dll \
-    /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libstdc++-6.dll \
+    /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_dw2-1.dll \
+    /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll \
     .
 ```
 
