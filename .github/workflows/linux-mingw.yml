@@ -64,8 +64,8 @@ jobs:
           COPYING \
           README.md \
           /usr/i686-w64-mingw32/lib/libwinpthread-1.dll \
-          /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libgcc_s_sjlj-1.dll \
-          /usr/lib/gcc/i686-w64-mingw32/9.3-posix/libstdc++-6.dll \
+          /usr/lib/gcc/i686-w64-mingw32/*-posix/libgcc_s_dw2-1.dll \
+          /usr/lib/gcc/i686-w64-mingw32/*-posix/libstdc++-6.dll \
           build/visdriver.exe \
           "visdriver_win32bin_mingw_${{ github.sha }}"/
 
