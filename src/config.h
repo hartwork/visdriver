@@ -18,12 +18,15 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <stdbool.h>
+
 typedef struct _visdriver_config_t {
   const char *input_plugin_filename;
   const char *output_plugin_filename;
   const char *vis_plugin_filename;
   const char *const *tracks;
   int track_count;
+  bool render_from_input_plugin_thread;
 } visdriver_config_t;
 
 void parse_command_line(visdriver_config_t *config, int argc,
