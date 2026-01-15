@@ -100,6 +100,14 @@ void parse_command_line(visdriver_config_t *config, int argc,
       OPT_STRING('W', "vis", &config->vis_plugin_filename, "vis plug-in to use",
                  NULL, 0, 0),
 
+      OPT_GROUP("Advanced configuration:"),
+      OPT_BOOLEAN(0, "render-from-input-plugin-thread",
+                  &config->render_from_input_plugin_thread,
+                  "render from input plugin thread"
+                  " (reduces lag but will crash with some plugins)"
+                  " [default: render from main thread]",
+                  NULL, 0, OPT_NONEG),
+
       OPT_END(),
   };
 
