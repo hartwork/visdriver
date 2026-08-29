@@ -43,4 +43,8 @@ int __cdecl VSAAdd(void *data, int timestamp);
 
 void __cdecl VSASetInfo(int srate, int nch);
 
+void vis_configure(bool render_from_input_plugin_thread);
+
+void vis_render();
+
 #endif // ifndef VISUALIZATION_H

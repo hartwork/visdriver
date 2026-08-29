@@ -107,12 +107,14 @@ void self_identify() {
 }
 
 int main(int argc, char **argv) {
-  visdriver_config_t config = {NULL};
+  visdriver_config_t config = {.render_from_input_plugin_thread = false};
   parse_command_line(&config, argc, argv); // may exit
 
   log_auto_configure_indent();
 
   self_identify();
+
+  vis_configure(config.render_from_input_plugin_thread);
 
   int current_track_index = -1;
   bool playing = false;
@@ -228,6 +230,8 @@ int main(int argc, char **argv) {
         last_stat_dump_at_ms = now_ms;
       }
     }
+
+    vis_render();
 
     sleep_milliseconds(1); // to avoid 100% CPU usage
   }
